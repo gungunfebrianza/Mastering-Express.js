@@ -4,23 +4,23 @@ const schema = mongoose.Schema;
 //create schema
 const UserSchema = new schema({
   name: {
-    type: string,
+    type: String,
     required: true
   },
   email: {
-    type: string,
+    type: String,
     required: true
   },
   password: {
-    type: string,
+    type: String,
     required: true
   },
   avatar: {
-    type: string
+    type: String
   },
   date: {
     type: Date,
-    required: Date.now
+    default: Date.now
   }
 });
 
