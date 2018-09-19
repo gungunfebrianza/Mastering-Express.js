@@ -1,9 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
-const users = require('./routes/api/Users');
-const profile = require('./routes/api/Profile');
-const posts = require('./routes/api/Posts');
+const users = require('./routes/api/users');
+const profile = require('./routes/api/profile');
+const posts = require('./routes/api/posts');
 
 const app = express();
 
