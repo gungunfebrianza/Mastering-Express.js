@@ -16,8 +16,7 @@ const UserSchema = new schema({
     required: true
   },
   avatar: {
-    type: string,
-    required: true
+    type: string
   },
   date: {
     type: Date,

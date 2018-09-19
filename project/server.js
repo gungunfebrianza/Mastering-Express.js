@@ -9,6 +9,7 @@ const posts = require("./routes/api/posts");
 const app = express();
 
 // Body Parser Middleware
+// If extended is false, you can not post "nested object"
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
