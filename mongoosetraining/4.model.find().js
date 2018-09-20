@@ -20,15 +20,15 @@ var schema = new Schema({ name: "string", size: "string" });
 var Tank = connection1.model("Tank", schema);
 
 // 3. Create Document
-var small = new Tank({ name: "small", size: "small" });
+var small = new Tank({ name: "medium", size: "medium" });
 small.save(function(err) {
   if (err) return handleError(err);
   console.log("saved"); // saved!
 });
 
 // 4. Querying
-//we want to display all the tank we've seen.
-Tank.find(function(err, tanks) {
+//we want to display all specific the tank we've seen.
+Tank.find({ name: "small" }, function(err, tanks) {
   if (err) return console.error(err);
   console.log(tanks);
 });
