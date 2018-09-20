@@ -20,7 +20,7 @@ var schema = new Schema({
 });
 
 // 2. Compile Schema
-var ModelTank = connection.model("Tank", schema);
+var ModelTank = connection.model("ModelTank", schema);
 
 // 3. Create Document
 var DocumentBig = new ModelTank({
@@ -39,3 +39,5 @@ ModelTank.find(function(err, tanks) {
   if (err) return console.error(err);
   console.log(tanks);
 });
+
+

@@ -36,7 +36,7 @@ var DocumentBig = new ModelTank({
 });
 
 DocumentBig.save(function(err) {
-  if (err) return handleError(err);
+  if (err) return console.error(err);
   console.log("saved"); // saved!
 });
 
@@ -46,4 +46,3 @@ ModelTank.find({ age: 20 }, function(err, tanks) {
   if (err) return console.error(err);
   console.log(tanks);
 });
-
