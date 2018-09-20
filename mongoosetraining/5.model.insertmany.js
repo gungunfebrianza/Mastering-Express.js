@@ -27,20 +27,22 @@ var schema = new Schema({
 // 2. Compile Schema
 var ModelMan = connection1.model("Man", schema);
 
-// 3. Create Document
-var x = new ModelMan({
-  name: "YumaTOLOL",
-  age: 32,
-  wallet: 2433.87773839
-});
-x.save(function(err) {
-  if (err) return console.error(err);
-  console.log("saved"); // saved!
-});
+// // 3. Create Document
+// var x = new ModelMan({
+//   name: "YumaTOLOL",
+//   age: 32,
+//   wallet: 2433.87773839
+// });
+// x.save(function(err) {
+//   if (err) return console.error(err);
+//   console.log("saved"); // saved!
+// });
 
 // 4. Querying
 //we want to display all specific the tank we've seen.
-ModelMan.find({ name: "Qrista" }, function(err, tanks) {
+ModelMan.find({ name: "Qrista" }, function(err, man) {
   if (err) return console.error(err);
-  console.log(tanks);
+  console.log(typeof man);
+  console.log(man[0]);
+  console.log(man[0].name);
 });

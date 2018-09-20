@@ -14,25 +14,34 @@ db.once("open", function() {
 });
 
 // 1. Create Schema
-var schema = new Schema(
-  { 
-    name: "string", 
-    size: "string" 
-  });
+var schema = new Schema({
+  name: "string",
+  age: {
+    type: Number,
+    min: [5, "Too young"],
+    max: 99
+  },
+  wallet: { type: Number, required: [true, "Add Me Money!"] }
+});
 
 // 2. Compile Schema
-var Tank = connection1.model("Tank", schema);
+var ModelMan = connection1.model("Man", schema);
 
 // 3. Create Document
-var small = new Tank({ name: "medium", size: "medium" });
-small.save(function(err) {
-  if (err) return handleError(err);
+var x = new ModelMan({
+  name: "YumaTOLOL",
+  age: 32,
+  wallet: 2433.87773839
+});
+
+x.save(function(err) {
+  if (err) return console.error(err);
   console.log("saved"); // saved!
 });
 
 // 4. Querying
-//we want to display all specific the tank we've seen.
-Tank.find({ name: "small" }, function(err, tanks) {
+//we want to display all specific the man we've seen.
+ModelMan.find(function(err, man) {
   if (err) return console.error(err);
-  console.log(tanks);
+  console.log(man);
 });
