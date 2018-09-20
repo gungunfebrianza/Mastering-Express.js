@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { connection, Schema } = mongoose;
 
-mongoose.connect("mongodb://localhost:27017").catch(console.error);
+mongoose.connect("mongodb://localhost:27017/training").catch(console.error);
 
 //Define a schema:
 const UserSchema = new Schema({
@@ -11,22 +11,22 @@ const UserSchema = new Schema({
 });
 
 // Compile the schema into a model:
-const User = mongoose.model("User", UserSchema);
+const ModelUser = mongoose.model("User", UserSchema);
 
 //Define a function that will be used for adding new users:
 const addUser = (firstName, lastName) =>
-  new User({
+  new ModelUser({
     firstName,
     lastName
   }).save();
 
 /*Define a function that will be used for retrieving a user from the
 collection of users by its id:*/
-const getUser = id => User.findById(id);
+const getUser = id => ModelUser.findById(id);
 
 /*Define a function that will remove the user from the collection of users
 by its id:*/
-const removeUser = id => User.remove({ id });
+const removeUser = id => ModelUser.remove({ id });
 
 /*Define an event listener that will perform CRUD operations once the there is
 a connection to the database. First, add a new user and save it.
@@ -35,7 +35,7 @@ and save it. Finally, remove the user from the collection by its id:*/
 connection.once("connected", async () => {
   try {
     // Create
-    const newUser = await addUser("John", "Smith");
+    const newUser = await addUser("Gun Gun", "Febrianza");
     // Read
     const user = await getUser(newUser.id);
     // Update
