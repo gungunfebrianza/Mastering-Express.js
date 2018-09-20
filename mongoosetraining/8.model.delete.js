@@ -27,9 +27,16 @@ var schema = new Schema({
 // 2. Compile Schema
 var ModelMan = mongooseConnection.model("Man", schema);
 
-// 3. Querying
+// 3. Querying Delete One
 //Deletes the first document that matches conditions from the collection. Behaves like remove(), but deletes at most one document regardless of the single option.
 ModelMan.deleteOne({ name: "WildanBanqong a" }, function(err, man) {
+  if (err) return console.error(err);
+  console.log(man);
+});
+
+// 4. Querying Delete Many
+//Deletes all of the documents that match conditions from the collection. Behaves like remove(), but deletes all documents that match conditions regardless of the single option.
+ModelMan.deleteMany({ name: "YumaTOLOL" }, function(err, man) {
   if (err) return console.error(err);
   console.log(man);
 });
