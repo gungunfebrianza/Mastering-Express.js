@@ -18,7 +18,7 @@ router.get("/test", (req, res) => res.json({ msg: "Users Works" }));
 // @access  Public
 router.post("/register", (req, res) => {
   //check email first
-  User.findOne({ email: req.body.email }).then(user => {
+  ModelUser.findOne({ email: req.body.email }).then(user => {
     if (user) {
       return res.status(400).json({ email: "Email is Already Exsist!" });
     } else {
@@ -28,6 +28,7 @@ router.post("/register", (req, res) => {
         d: "mm" //Default
       });
 
+      // Store in object
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,

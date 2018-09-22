@@ -12,6 +12,8 @@ const app = express();
 // Body Parser Middleware
 // If extended is false, you can not post "nested object"
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
 app.use(bodyParser.json());
 
 // DB Config
