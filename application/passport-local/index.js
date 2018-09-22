@@ -22,6 +22,7 @@ app.get("/success", (req, res) =>
 );
 app.get("/error", (req, res) => res.send("error logging in"));
 
+/* The first one will be invoked on authentication, and its job is to serialize the user instance with the information we pass to it(the user ID in this case) and store it in the session via a cookie.The second one will be invoked every subsequent request to deserialize the instance, providing it the unique cookie identifier as a “credential”.  */
 passport.serializeUser(function(user, cb) {
   cb(null, user.id);
 });
