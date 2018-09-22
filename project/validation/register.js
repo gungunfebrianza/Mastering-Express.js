@@ -11,22 +11,22 @@ module.exports = function validateRegisterInput(data) {
   if (!validator.isLength(data.name, { min: 2, max: 30 })) {
     errors.name = "Name must between 2 to 30 characters";
   }
-  if (!validator.isEmpty(data.name)) {
+  if (validator.isEmpty(data.name)) {
     errors.name = "Name Field is required";
   }
-  if (!validator.isEmpty(data.email)) {
+  if (validator.isEmpty(data.email)) {
     errors.email = "Email Field is required";
   }
   if (!validator.isEmail(data.email)) {
     errors.email = "Email is invalid";
   }
-  if (!validator.isEmpty(data.password)) {
+  if (validator.isEmpty(data.password)) {
     errors.password = "Password Field is required";
   }
   if (!validator.isLength(data.password, { min: 6, max: 30 })) {
     errors.password = "password must between 6 to 30 characters";
   }
-  if (!validator.isEmpty(data.password2)) {
+  if (validator.isEmpty(data.password2)) {
     errors.password2 = "Confirm Password Field is required";
   }
   if (!validator.equals(data.password, data.password2)) {

@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
 const validateRegisterInput = require("../../validation/register");
-
+const validateLoginInput = require("../../validation/login");
 // Load User Model
 const ModelUser = require("../../models/User");
 
@@ -59,12 +59,19 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
+  const { errors, isValid } = validateLoginInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const email = req.body.email;
   const password = req.body.password;
 
   ModelUser.findOne({ email }).then(user => {
     if (!user) {
-      return res.status(404).json({ email: "User Not Found" });
+      errors.email = "User Not Found";
+      return res.status(404).json(errors);
     }
 
     //check password
@@ -76,7 +83,8 @@ router.post("/login", (req, res) => {
           res.json({ success: true, token: "Bearer " + token });
         });
       } else {
-        return res.status(400).json({ password: "Password Incorect" });
+        errors.password = "Password Incorect";
+        return res.status(400).json(errors);
       }
     });
   });
