@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
 // Load User Model
-const user = require("../../models/User");
+const ModelUser = require("../../models/User");
 
 // @route   GET api/users/test
 // @desc    Test Users Route
@@ -18,8 +18,8 @@ router.get("/test", (req, res) => res.json({ msg: "Users Works" }));
 // @access  Public
 router.post("/register", (req, res) => {
   //check email first
-  ModelUser.findOne({ email: req.body.email }).then(user => {
-    if (user) {
+  ModelUser.findOne({ email: req.body.email }).then(userx => {
+    if (userx) {
       return res.status(400).json({ email: "Email is Already Exsist!" });
     } else {
       const avatar = gravatar.url(req.body.email, {
@@ -54,7 +54,7 @@ router.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  User.findOne({ email }).then(user => {
+  ModelUser.findOne({ email }).then(user => {
     if (!user) {
       return res.status(404).json({ email: "User Not Found" });
     }
@@ -65,10 +65,7 @@ router.post("/login", (req, res) => {
         const payload = { id: user.id, name: user.name, avatar: user.avatar };
         // sign token
         jwt.sign(payload, "secret", { expiresIn: 3600 }, (err, token) => {
-          res.json({
-            success: true,
-            token: "Bearer " + token
-          });
+          res.json({ success: true, token: "Bearer " + token });
         });
       } else {
         return res.status(400).json({ password: "Password Incorect" });
@@ -82,9 +79,16 @@ router.post("/login", (req, res) => {
 // @access  Private
 router.get(
   "/current",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", {
+    session: false,
+    failureRedirect: "/login"
+  }),
   (req, res) => {
-    res.json(req.user);
+    res.json({
+      id: req.user.id,
+      name: req.user.name,
+      email: req.user.email
+    });
   }
 );
 
