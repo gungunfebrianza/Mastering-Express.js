@@ -32,30 +32,54 @@ router.get(
 );
 
 // @route   POST API/profile
-// @desc    Create User Profile
+// @desc    Create or Edit User Profile
 // @access  Private
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const ProfileField = {};
-    ProfileField.user = req.user.id;
-    if (req.body.handle) ProfileField.user = req.body.handle;
-    if (req.body.company) ProfileField.user = req.body.company;
-    if (req.body.website) ProfileField.user = req.body.website;
-    if (req.body.location) ProfileField.user = req.body.location;
-    if (req.body.bio) ProfileField.user = req.body.bio;
-    if (req.body.status) ProfileField.user = req.body.status;
-    if (req.body.githubusername) ProfileField.user = req.body.githubusername;
+    const ProfileFields = {};
+    ProfileFields.user = req.user.id;
+    if (req.body.handle) ProfileFields.user = req.body.handle;
+    if (req.body.company) ProfileFields.user = req.body.company;
+    if (req.body.website) ProfileFields.user = req.body.website;
+    if (req.body.location) ProfileFields.user = req.body.location;
+    if (req.body.bio) ProfileFields.user = req.body.bio;
+    if (req.body.status) ProfileFields.user = req.body.status;
+    if (req.body.githubusername) ProfileFields.user = req.body.githubusername;
     if (typeof req.body.skills !== "undefined") {
-      ProfileField.skills = req.body.skills.split(",");
+      ProfileFields.skills = req.body.skills.split(",");
     }
-    ProfileField.social = {};
-    if (req.body.youtube) ProfileField.user = req.body.youtube;
-    if (req.body.twitter) ProfileField.user = req.body.twitter;
-    if (req.body.facebook) ProfileField.user = req.body.facebook;
-    if (req.body.linkedin) ProfileField.user = req.body.linkedin;
-    if (req.body.instagram) ProfileField.user = req.body.instagram;
+    ProfileFields.social = {};
+    if (req.body.youtube) ProfileFields.user = req.body.youtube;
+    if (req.body.twitter) ProfileFields.user = req.body.twitter;
+    if (req.body.facebook) ProfileFields.user = req.body.facebook;
+    if (req.body.linkedin) ProfileFields.user = req.body.linkedin;
+    if (req.body.instagram) ProfileFields.user = req.body.instagram;
+
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      if (profile) {
+        // Update
+        Profile.findOneAndUpdate(
+          {
+            user: req.user.id
+          },
+          { $set: ProfileFields },
+          { new: true }
+        ).then(profile => res.json(profile));
+      } else {
+        // Create
+        // Check if Handle Exist
+        Profile.findOne({ handle: ProfileFields.handle }).then(profile => {
+          if (profile) {
+            errors.handle = "That Handle is Already Exist";
+            res.status(400).json(errors);
+          }
+          // Save Profile
+          new Profile(ProfileFields).save().then(profile => res.json(profile));
+        });
+      }
+    });
   }
 );
 
