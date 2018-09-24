@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const ProfileSchema = new Schema({
   user: {
@@ -10,7 +10,9 @@ const ProfileSchema = new Schema({
     type: String,
     max: 40
   },
-  company: {},
+  company: {
+    type: String
+  },
   website: {
     type: String
   },
