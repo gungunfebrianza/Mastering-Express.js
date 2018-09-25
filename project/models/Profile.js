@@ -8,6 +8,7 @@ const ProfileSchema = new Schema({
   },
   handle: {
     type: String,
+    required: true,
     max: 40
   },
   company: {
@@ -118,4 +119,4 @@ const ProfileSchema = new Schema({
   }
 });
 
-module.exports = ModelProfile = mongoose.model("profile", ProfileSchema);
+module.exports = Profile = mongoose.model("profile", ProfileSchema);

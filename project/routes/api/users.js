@@ -8,7 +8,7 @@ const passport = require("passport");
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 // Load User Model
-const ModelUser = require("../../models/User");
+const User = require("../../models/User");
 
 // @route   GET api/users/test
 // @desc    Test Users Route
@@ -25,7 +25,7 @@ router.post("/register", (req, res) => {
     return res.status(400).json(errors);
   }
   //check email first
-  ModelUser.findOne({ email: req.body.email }).then(user => {
+  User.findOne({ email: req.body.email }).then(user => {
     if (user) {
       errors.email = "Email is Already Exsist!";
       return res.status(400).json(errors);
@@ -68,7 +68,7 @@ router.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  ModelUser.findOne({ email }).then(user => {
+  User.findOne({ email }).then(user => {
     if (!user) {
       errors.email = "User Not Found";
       return res.status(404).json(errors);
