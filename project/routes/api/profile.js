@@ -4,8 +4,8 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 
 const ValidateProfileInput = require("../../validation/profile");
-/* const validateExperienceInput = require("../../validation/experience");
-const validateEducationInput = require("../../validation/education"); */
+const validateExperienceInput = require("../../validation/experience");
+/* const validateEducationInput = require("../../validation/education"); */
 
 // Load Profile Model
 const Profile = require("../../models/Profile");
@@ -17,7 +17,7 @@ const User = require("../../models/User");
 // @access  Public
 router.get("/test", (req, res) => res.json({ msg: "Profile Works" }));
 
-// @route   GET API/profile
+// @route   GET api/profile
 // @desc    Get current users profile
 // @access  Private
 router.get(
@@ -25,8 +25,9 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const errors = {};
+
     Profile.findOne({ user: req.user.id })
-      .populate("user", ["name", "avatar", "email"])
+      .populate("user", ["name", "avatar"])
       .then(profile => {
         if (!profile) {
           errors.noprofile = "There is no profile for this user";
@@ -34,25 +35,27 @@ router.get(
         }
         res.json(profile);
       })
-      .catch(err => res.status(404).json(errors));
+      .catch(err => res.status(404).json(err));
   }
 );
 
-// @route   GET API/profile/All
-// @desc    Get All Profiles
+// @route   GET api/profile/all
+// @desc    Get all profiles
 // @access  Public
 router.get("/all", (req, res) => {
   const errors = {};
+
   Profile.find()
     .populate("user", ["name", "avatar"])
     .then(profiles => {
       if (!profiles) {
-        errors.noprofile = "There is no profiles";
+        errors.noprofile = "There are no profiles";
         return res.status(404).json(errors);
       }
-      res.status(profiles);
+
+      res.json(profiles);
     })
-    .catch(err => res.status(404).json({ profile: "There is no Profiles" }));
+    .catch(err => res.status(404).json({ profile: "There are no profiles" }));
 });
 
 // @route   GET API/profile/handle/:handle
