@@ -10,20 +10,15 @@ const validateLoginInput = require("../../validation/login");
 // Load User Model
 const User = require("../../models/User");
 
-// @route   GET api/users/test
-// @desc    Test Users Route
-// @access  Public
-router.get("/test", (req, res) => res.json({ msg: "Users Works" }));
-
 // @route   GET api/users/register
 // @desc    Register Users
 // @access  Public
 router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
-
   if (!isValid) {
     return res.status(400).json(errors);
   }
+
   //check email first
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
