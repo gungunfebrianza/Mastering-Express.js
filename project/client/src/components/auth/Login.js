@@ -1,12 +1,11 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
 
 class Login extends Component {
   constructor() {
     super();
     this.state = {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       errors: {}
     };
 
@@ -16,10 +15,10 @@ class Login extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const user = {
-      email: this.state.email,
-      password: this.state.password
-    };
+    // const user = {
+    //   email: this.state.email,
+    //   password: this.state.password
+    // };
   }
 
   onChange(e) {
