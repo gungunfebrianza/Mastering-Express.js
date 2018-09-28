@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class Login extends Component {
   constructor() {
@@ -19,7 +20,6 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    console.log(user);
   }
 
   onChange(e) {
