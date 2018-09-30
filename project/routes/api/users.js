@@ -1,19 +1,19 @@
-const express = require("express");
-const gravatar = require("gravatar");
+const express = require('express');
+const gravatar = require('gravatar');
 const router = express.Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const passport = require("passport");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const passport = require('passport');
 
-const validateRegisterInput = require("../../validation/register");
-const validateLoginInput = require("../../validation/login");
+const validateRegisterInput = require('../../validation/register');
+const validateLoginInput = require('../../validation/login');
 // Load User Model
-const User = require("../../models/User");
+const User = require('../../models/User');
 
 // @route   GET api/users/register
 // @desc    Register Users
 // @access  Public
-router.post("/register", (req, res) => {
+router.post('/register', (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
   if (!isValid) {
     return res.status(400).json(errors);
@@ -22,13 +22,13 @@ router.post("/register", (req, res) => {
   //check email first
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
-      errors.email = "Email is Already Exsist!";
+      errors.email = 'Email is Already Exsist!';
       return res.status(400).json(errors);
     } else {
       const avatar = gravatar.url(req.body.email, {
-        s: "200", //Size
-        r: "pg", //Rating
-        d: "mm" //Default
+        s: '200', //Size
+        r: 'pg', //Rating
+        d: 'mm' //Default
       });
 
       // Store in object
@@ -53,7 +53,7 @@ router.post("/register", (req, res) => {
   });
 });
 
-router.post("/login", (req, res) => {
+router.post('/login', (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
 
   if (!isValid) {
@@ -65,7 +65,7 @@ router.post("/login", (req, res) => {
 
   User.findOne({ email }).then(user => {
     if (!user) {
-      errors.email = "User Not Found";
+      errors.email = 'User Not Found';
       return res.status(404).json(errors);
     }
 
@@ -74,11 +74,11 @@ router.post("/login", (req, res) => {
       if (isMatch) {
         const payload = { id: user.id, name: user.name, avatar: user.avatar };
         // sign token
-        jwt.sign(payload, "secret", { expiresIn: 3600 }, (err, token) => {
-          res.json({ success: true, token: "Bearer " + token });
+        jwt.sign(payload, 'secret', { expiresIn: 3600 }, (err, token) => {
+          res.json({ success: true, token: 'Bearer ' + token });
         });
       } else {
-        errors.password = "Password Incorect";
+        errors.password = 'Password Incorect';
         return res.status(400).json(errors);
       }
     });
@@ -89,10 +89,10 @@ router.post("/login", (req, res) => {
 // @desc    Return Current User
 // @access  Private
 router.get(
-  "/current",
-  passport.authenticate("jwt", {
+  '/current',
+  passport.authenticate('jwt', {
     session: false,
-    failureRedirect: "/login"
+    failureRedirect: '/login'
   }),
   (req, res) => {
     res.json({
