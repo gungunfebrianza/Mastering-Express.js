@@ -1,5 +1,5 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
 /*Syntax
 req.cookies
@@ -11,15 +11,12 @@ cookies sent by the request. If the request contains no cookies, it defaults to 
 */
 
 app.use('/', function(req, res, next) {
-  req.cookies.name;
+  console.log(req.cookies);
   next();
 });
 
 app.get('/', (req, res) => {
-	res.send('Your Request path Recorded on the server!');
-})
+  res.send('Your Request path Recorded on the server!');
+});
 
-app.listen(
-	9999,
-	() => console.log('Web Server running on port 9999'),
-)
+app.listen(9999, () => console.log('Web Server running on port 9999'));
