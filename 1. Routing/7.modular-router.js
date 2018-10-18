@@ -11,13 +11,13 @@ miniapp.get('/home', (request, response, next) => {
 		.send(`You are visiting /home from ${url}`)
 })
 
-app.use('/first', miniapp)
-app.use('/second', miniapp)
+app.use('/api', miniapp)
+app.use('/about', miniapp)
 
 app.listen(
 	9999,
 	() => console.log('Web Server running on port 9999'),
 )
 
-// http://localhost:1337/first/home
-// http://localhost:1337/second/home
+// http://localhost:9999/api/home
+// http://localhost:9999/about/home
