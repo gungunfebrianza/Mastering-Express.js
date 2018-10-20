@@ -1,7 +1,6 @@
 const express = require('express');
 
 var app = express()
-var router = express.Router()
 
 var wiki = require('./5.router-module.js');
 app.use('/wiki', wiki);
