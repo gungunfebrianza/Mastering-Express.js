@@ -36,7 +36,7 @@ if (localStorage.jwtToken) {
   //Decode Token and get user info and exp
   const decoded = jwt_decode(localStorage.jwtToken);
   //Set User and isAuthenticated
-  store.dispatch(setCurrentUser(decoded));
+  reduxStore.dispatch(setCurrentUser(decoded));
 }
 
 class App extends Component {
