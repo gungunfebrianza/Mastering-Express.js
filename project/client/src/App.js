@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import rootReducer from './reducers';
 
 // Component
 import Navbar from './components/layout/Navbar';
@@ -13,8 +14,13 @@ import Login from './components/auth/Login';
 
 import './App.css';
 
+const initialState = {};
 const middleware = [thunk];
-const reduxStore = createStore(() => [], {}, applyMiddleware(...middleware));
+const reduxStore = createStore(
+  rootReducer,
+  initialState,
+  applyMiddleware(...middleware)
+);
 
 class App extends Component {
   render() {
