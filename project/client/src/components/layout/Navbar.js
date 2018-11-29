@@ -21,11 +21,13 @@ class Navbar extends Component {
             className="nav-link"
           >
             <img
+              className="rounded-circle"
               src={user.avatar}
               alt={user.name}
               style={{ width: '25px', marginRight: '5px' }}
               title="You Must Have a Gravatar"
             />
+            Logout
           </a>
         </li>
       </ul>
