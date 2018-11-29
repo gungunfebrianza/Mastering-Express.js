@@ -5,6 +5,10 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
+import jwt_decode from 'jwt-decode';
+import setAuthToken from './utils/setAuthToken';
+import { setCurrentUser } from './actions/authActions';
+
 // Component
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
@@ -24,6 +28,16 @@ const reduxStore = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
+
+//Check for Token
+if (localStorage.jwtToken) {
+  //Set Auth Token header
+  setAuthToken(localStorage.jwtToken);
+  //Decode Token and get user info and exp
+  const decoded = jwt_decode(localStorage.jwtToken);
+  //Set User and isAuthenticated
+  store.dispatch(setCurrentUser(decoded));
+}
 
 class App extends Component {
   render() {
