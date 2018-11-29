@@ -5,6 +5,11 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
 
 class Navbar extends Component {
+  onLogoutClick(e) {
+    e.preventDefault();
+    this.props.logoutUser();
+  }
+
   render() {
     const { isAuthenticated, user } = this.props.auth;
     const authLinks = (
