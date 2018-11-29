@@ -19,7 +19,14 @@ class Navbar extends Component {
             href="#"
             onClick={this.onLogoutClick.bind(this)}
             className="nav-link"
-          />
+          >
+            <img
+              src={user.avatar}
+              alt={user.name}
+              style={{ width: '25px', marginRight: '5px' }}
+              title="You Must Have a Gravatar"
+            />
+          </a>
         </li>
       </ul>
     );
@@ -63,6 +70,7 @@ class Navbar extends Component {
                 </Link>
               </li>
             </ul>
+            {isAuthenticated ? authLinks : guestLinks}
           </div>
         </div>
       </nav>
