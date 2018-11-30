@@ -4,11 +4,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCurrentProfile } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
-import ProfileActions from './ProfileActions'
+import ProfileActions from './ProfileActions';
 
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
+  }
+
+  onDeleteClick(e) {
+    this.props.deleteAccount();
   }
 
   render() {
@@ -27,6 +31,14 @@ class Dashboard extends Component {
             <p className="lead text-muted">
               Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>{' '}
             </p>
+            <ProfileActions />
+            <div style={{ marginBottom: '60px' }} />
+            <button
+              onClick={this.onDeleteClick.bind(this)}
+              className="btn btn-danger"
+            >
+              Delete My Account
+            </button>
           </div>
         );
       } else {
