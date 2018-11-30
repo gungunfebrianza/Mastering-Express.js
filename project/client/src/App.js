@@ -19,7 +19,6 @@ import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 
 import './App.css';
-import { clearCurrentProfile } from './actions/profileActions';
 
 const initialState = {};
 const middleware = [thunk];
