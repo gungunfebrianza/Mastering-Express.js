@@ -8,6 +8,7 @@ import rootReducer from './reducers';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authActions';
+import { clearCurrentProfile } from './actions/profileActions';
 
 // Component
 import Navbar from './components/layout/Navbar';
@@ -18,6 +19,7 @@ import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 
 import './App.css';
+import { clearCurrentProfile } from './actions/profileActions';
 
 const initialState = {};
 const middleware = [thunk];
@@ -44,6 +46,8 @@ if (localStorage.jwtToken) {
   if (decoded.exp < currentTime) {
     //Logout User
     reduxStore.dispatch(logoutUser());
+    //Clear Current Profile
+    reduxStore.dispatch(clearCurrentProfile());
     //Redirect to Login
     window.location.href = '/login';
   }
