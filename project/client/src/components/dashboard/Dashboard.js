@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getCurrentProfile, deleteAccount } from '../../actions/profileActions';
 import Spinner from '../common/Spinner';
 import ProfileActions from './ProfileActions';
+import Experience from './Experience'
 
 class Dashboard extends Component {
   componentDidMount() {
