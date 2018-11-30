@@ -72,6 +72,7 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
+  deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired
 };
@@ -83,5 +84,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile }
+  { getCurrentProfile, deleteAccount }
 )(Dashboard);
