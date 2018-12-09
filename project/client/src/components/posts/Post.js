@@ -20,4 +20,4 @@ class Post extends Component {
   }
 }
 
-export default Posts;
+export default Post;
