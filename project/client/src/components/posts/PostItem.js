@@ -6,7 +6,9 @@ import { Link } from 'react-router-dom';
 import { deletePost } from '../../actions/postAction';
 
 class PostItem extends Component {
-  onDeleteClick(id) {}
+  onDeleteClick(id) {
+    this.props.deletePost(id);
+  }
 
   render() {
     const { post, auth } = this.props;
