@@ -20,4 +20,12 @@ class Post extends Component {
   }
 }
 
-export default Post;
+Post.propTypes = {
+  post: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  post: state.post
+});
+
+export default connect(mapStateToProps)(Post);
