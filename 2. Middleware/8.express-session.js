@@ -38,7 +38,7 @@ A real web app will usually be using a post request and passing in the data in
 the post form. Again the user and passwords are hardcoded here for
 demonstration purpose. A real web app will check the incoming user and password
 against the user and password stored in a database on there server.
-*/
+*/ 
 app.get('/login', function(req, res) {
   if (!req.query.username || !req.query.password) {
     res.send('login failed');
