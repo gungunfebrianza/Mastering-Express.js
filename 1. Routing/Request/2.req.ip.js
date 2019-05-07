@@ -1,5 +1,5 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
 /*Syntax
 req.ip
@@ -18,10 +18,8 @@ app.use('/', function(req, res, next) {
 });
 
 app.get('/', (req, res) => {
-	res.send('Your Request path Recorded on the server!');
-})
+  res.send('Your Request path Recorded on the server! ' + req.ip);
+  // output : Your Request path Recorded on the server! ::1
+});
 
-app.listen(
-	9999,
-	() => console.log('Web Server running on port 9999'),
-)
+app.listen(9999, () => console.log('Web Server running on port 9999'));
