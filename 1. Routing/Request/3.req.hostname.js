@@ -1,5 +1,5 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
 /*Syntax
 req.hostname
@@ -19,15 +19,13 @@ req.hostname
 */
 
 app.use('/', function(req, res, next) {
-  req.hostname
+  req.hostname;
   next();
 });
 
 app.get('/', (req, res) => {
-	res.send('Your Request path Recorded on the server!');
-})
+  res.send('Your Request path Recorded on the server! ' + req.hostname);
+  // Output : Your Request path Recorded on the server! localhost
+});
 
-app.listen(
-	9999,
-	() => console.log('Web Server running on port 9999'),
-)
+app.listen(9999, () => console.log('Web Server running on port 9999'));
