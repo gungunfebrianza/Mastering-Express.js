@@ -1,7 +1,6 @@
-const express = require('express')
+const express = require('express');
 
-const app = express()
-
+const app = express();
 
 /*Syntax
 res.attachment([filename])
@@ -14,16 +13,13 @@ the extension name via res.type(), and sets the Content-Disposition
 “filename=” parameter.
 */
 app.get('/', (req, res) => {
-	res.attachment();
-	// Content-Disposition: attachment
+  // res.attachment();
+  // Content-Disposition: attachment
 
-	res.attachment('coffee.jpg');
-	// Content-Disposition: attachment; filename="logo.png"
-	// Content-Type: image/png
-})
+  res.attachment('coffee.jpg');
+  // Content-Disposition: attachment; filename="logo.png"
+  // Content-Type: image/png
+  // res.end();
+});
 
-
-app.listen(
-	9999,
-	() => console.log('Web Server running on port 9999'),
-)
+app.listen(9999, () => console.log('Web Server running on port 9999'));

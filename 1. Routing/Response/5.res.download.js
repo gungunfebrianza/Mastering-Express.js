@@ -22,7 +22,7 @@ call, and takes the exact same parameters.
 app.get('/', (req, res) => {
 	//res.download('/coffee.jpg');
 
-	res.download('/coffee.jpg', 'coffee.jpg');
+	res.download('coffee.jpg', 'coffee.jpg');
 
 	// res.download('/report-12345.pdf', 'report.pdf', function(err){
 	//   if (err) {
